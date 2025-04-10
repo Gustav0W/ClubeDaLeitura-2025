@@ -1,4 +1,7 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
+using ClubeDaLeitura.ConsoleApp.MóduloRevista;
+
+namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
 public class Emprestimo
 {

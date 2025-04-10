@@ -1,12 +1,33 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
+using ClubeDaLeitura.ConsoleApp.Compartilhados;
+
+namespace ClubeDaLeitura.ConsoleApp;
 
 internal class Program
 {
     static void Main(string[] args)
     {
-        Amigo amigo1 = new Amigo("José Cleber Vicente", "Pai do José", "(49) 99954-1509");
+        MenuClube menuClube = new MenuClube();
+
         List<Amigo> amigos = new List<Amigo>();
-        Console.Write(amigo1.Nome);
+
+        while (true)
+        {
+            string opcaoEscolhida = menuClube.ExibirMenu().ToUpper();
+
+            switch (opcaoEscolhida) 
+            {
+                case "1":
+
+                    break;
+
+            }
+
+            if (opcaoEscolhida == "S")
+            {
+                break;
+            }
+        } 
         
     }
 }

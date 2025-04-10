@@ -1,4 +1,4 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa;
 
 public class CaixaTematica
 {

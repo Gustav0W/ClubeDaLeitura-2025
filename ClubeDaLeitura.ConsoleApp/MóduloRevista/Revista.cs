@@ -1,4 +1,6 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
+
+namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 public class Revista
 {
