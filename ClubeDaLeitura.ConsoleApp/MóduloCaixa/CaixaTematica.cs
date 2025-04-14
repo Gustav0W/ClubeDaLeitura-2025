@@ -2,14 +2,15 @@
 
 public class CaixaTematica
 {
-    public string Etiqueta = " ";
-    public DateTime Prazo = default;
+    public int Id = 0;
+    public string Titulo = " ";
+    public char Etiqueta = ' ';
     public byte Raridade = 0;
 
-    public CaixaTematica(string etiqueta, DateTime prazo, byte raridade) 
-    { 
+    public CaixaTematica(string titulo, char etiqueta, byte raridade) 
+    {
+        Titulo = titulo;
         Etiqueta = etiqueta;
-        Prazo = prazo;
         Raridade = raridade;
     }
 }

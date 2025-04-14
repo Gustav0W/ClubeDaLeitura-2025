@@ -1,9 +1,10 @@
 ﻿namespace ClubeDaLeitura.ConsoleApp.Compartilhados;
 
-public class MenuClube
+public class TelaPrincipal
 {
-    public string ExibirMenu()
+    public string ExibirMenuPrincipal()
     {
+        Console.Clear();
         Console.WriteLine("==================================");
         Console.WriteLine("|         CLUBE DO LIVRO         |");
         Console.WriteLine("|            GUSTAVO W           |");

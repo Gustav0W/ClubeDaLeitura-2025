@@ -4,6 +4,7 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
 public class Amigo
 {
+    public int Id = 0;
     public string Nome = " ";
     public string Responsavel = " ";
     public string Telefone = " ";
@@ -13,20 +14,6 @@ public class Amigo
         Nome = nome;
         Responsavel = responsavel;
         Telefone = telefone;
-    }
-
-    public Amigo CadastrarAmigo()
-    {
-        Console.WriteLine("Informe o nome: ");
-        string nome = Console.ReadLine()!;
-        Console.WriteLine("Informe o nome do responsável: ");
-        string responsavel = Console.ReadLine()!;
-        Console.WriteLine("Informe o telefone FORMATO (XX) XXXXX-XXXX: ");
-        string telefone = Console.ReadLine()!;
-
-        Amigo novoAmigo = new Amigo(nome, responsavel, telefone);
-
-        return novoAmigo;
     }
 
 }
