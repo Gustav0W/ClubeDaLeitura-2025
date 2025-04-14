@@ -1,10 +1,4 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
-using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
 {
@@ -80,8 +74,9 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
 
                 if (c == null)
                     continue;
-                else if (c.Id == idCaixa);
-                return c;
+
+                else if (c.Id == idCaixa)
+                    return c;
             }
             return null;
         }

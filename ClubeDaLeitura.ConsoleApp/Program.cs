@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 using ClubeDaLeitura.ConsoleApp.Compartilhados;
 using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
+using ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp;
 
@@ -14,6 +15,7 @@ class Program
         TelaPrincipal menuClube = new TelaPrincipal();
         TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
         TelaCaixaTematica telaCaixaTematica = new TelaCaixaTematica();
+        TelaRevista telaRevista = new TelaRevista();
 
         List<Amigo> amigos = new List<Amigo>();
 
@@ -58,6 +60,26 @@ class Program
                         telaCaixaTematica.VisualizarCaixas(true);
                         break;
 
+                }
+            }
+            else if (opcaoPrincipal == "3")
+            {
+                string opcaoEscolhida = telaRevista.ExibirTelaRevistas().ToUpper();
+
+                switch(opcaoEscolhida)
+                {
+                    case "1":
+                        telaRevista.CadastrarRevista();
+                        break;
+                    case "2":
+                        telaRevista.EditarRevista();
+                        break;
+                    case "3":
+                        telaRevista.ExcluirRevista();
+                        break;
+                    case "4":
+                        telaRevista.VisualizarRevista(true);
+                        break;
                 }
             }
 

@@ -1,5 +1,4 @@
-﻿using ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
-using System.ComponentModel;
+﻿//using ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
@@ -9,7 +8,7 @@ public class Amigo
     public string Nome = " ";
     public string Responsavel = " ";
     public string Telefone = " ";
-    public Emprestimo[] Emprestimos;
+    //public Emprestimo[] Emprestimos;
     
     public Amigo(string nome, string responsavel, string telefone)
     {

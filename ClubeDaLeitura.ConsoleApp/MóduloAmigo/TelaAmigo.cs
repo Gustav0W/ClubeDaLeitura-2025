@@ -1,5 +1,4 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
-using System;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
