@@ -20,8 +20,6 @@ class Program
         TelaRevista telaRevista = new TelaRevista();
         TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
 
-        List<Amigo> amigos = new List<Amigo>();
-
         while (true)
         {
             string opcaoPrincipal = menuClube.ExibirMenuPrincipal().ToUpper();
@@ -82,6 +80,9 @@ class Program
                         break;
                     case "4":
                         telaRevista.VisualizarRevista(true);
+                        break;
+                    case "5":
+                        telaRevista.AdicionarRevistaNaCaixa();
                         break;
                 }
             }

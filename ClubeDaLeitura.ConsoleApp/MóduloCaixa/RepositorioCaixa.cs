@@ -5,25 +5,19 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
     public class RepositorioCaixa
     {
         CaixaTematica[] caixas = new CaixaTematica[10];
-        int contadorCaixas = 0; 
+        int contadorCaixas = 0;
 
-        public ConsoleColor DefinirCor(ConsoleColor corEtiqueta)
+        public ConsoleColor DefinirCor(char resposta)
         {
-            char resposta = ' ';
 
-            if (resposta == 'V')
-                corEtiqueta = ConsoleColor.Red;
-
-            else if (resposta == 'A')
-                corEtiqueta = ConsoleColor.Blue;
-
-            else if (resposta == 'C')
-                corEtiqueta = ConsoleColor.Cyan;
-
-            else if (resposta == 'R')
-                corEtiqueta = ConsoleColor.Magenta;
-
-            return corEtiqueta;
+            return resposta switch
+            {
+                'A' => ConsoleColor.Blue,
+                'V' => ConsoleColor.Red,
+                'C' => ConsoleColor.Cyan,
+                'R' => ConsoleColor.Magenta,
+                _ => ConsoleColor.White,
+            };
         }
         public void CadastrarCaixa(CaixaTematica novaCaixa)
         {

@@ -105,13 +105,14 @@ public class TelaCaixaTematica
 
             if (ct == null) continue;
 
-            if (ct.Raridade == 1)
-                raridadeEscrita = "Comum";
-            else
-                raridadeEscrita = "Raro";
+            raridadeEscrita = ct.Raridade == 1 ? "Comum" : "Raro";
+
+            Console.ForegroundColor = ct.Cor;
 
             Console.Write($"Id: {ct.Id}\nTitulo: {ct.Titulo}\nRaridade: {raridadeEscrita}\n");
             Console.WriteLine("-------------------------------------------------");
+
+            Console.ResetColor();
 
         }
         Notificador.ExibirMensagem("Aperte ENTER para continuar...", ConsoleColor.DarkYellow);
@@ -122,15 +123,17 @@ public class TelaCaixaTematica
         string nome = Console.ReadLine()!;
 
         Console.Write("Cor da caixa (A - Azul | V - Vermelho | C - Ciano | R - Rosa): ");
-        char corEtiqueta = Convert.ToChar(Console.ReadLine()!);
+        char corEtiqueta = Convert.ToChar(Console.ReadLine()!.ToUpper());
 
         Console.Write("Digite a raridade da caixa(1 - comum | 2 - raro): ");
         if (!byte.TryParse(Console.ReadLine(), out byte raridade))
         {
             Notificador.ExibirMensagem("Número inválido, tente novamente.\nAperte ENTER para continuar", ConsoleColor.Red);
         }
-        
-        CaixaTematica Caixa = new CaixaTematica(nome, corEtiqueta, raridade);
+
+        ConsoleColor cor = repositorioCaixa.DefinirCor(corEtiqueta);
+
+        CaixaTematica Caixa = new CaixaTematica(nome, corEtiqueta, raridade, cor);
 
         return Caixa;
     }

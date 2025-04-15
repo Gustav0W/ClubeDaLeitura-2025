@@ -68,8 +68,19 @@ public class RepositorioRevista
             else
             {
                 Console.Write($"\nId: {revista.Id}\nTitulo: {revista.Titulo}\nEdição: {revista.NumeroEdicao}\nAno de publicação:{revista.AnoPublicacao}");
-                Console.WriteLine("===============================================================");
+                Console.WriteLine("\n===============================================================");
             }
         }
     }
+    public Revista ProcurarRevista(int idRevista)
+    {
+        Revista revistaEncontrada = revistas.Find(revista => revista.Id == idRevista)!;
+        return revistaEncontrada;
+    }
+
+    public void AdicionarRevistaNaCaixa(Revista revistaEncontrada, CaixaTematica caixa)
+    {
+        caixa.Revistas.Add(revistaEncontrada);
+    }
+
 }

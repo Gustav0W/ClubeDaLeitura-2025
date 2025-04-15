@@ -1,11 +1,12 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
+using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 public class TelaRevista
 {
     RepositorioRevista repositorioRevista = new RepositorioRevista();
-
+    RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
     public void ExibirCabecalho()
     {
         Console.Clear();
@@ -23,6 +24,7 @@ public class TelaRevista
         Console.WriteLine("| 2 - Editar Revista             |");
         Console.WriteLine("| 3 - Excluir Revista            |");
         Console.WriteLine("| 4 - Visualizar Revista         |");
+        Console.WriteLine("| 5 - Adicionar Revista em caixa |");
         Console.WriteLine("| S - Voltar                     |");
         Console.WriteLine("==================================\n");
         Console.Write("Informe uma opção válida: ");
@@ -110,6 +112,23 @@ public class TelaRevista
         Revista novaRevista = new Revista(titulo, numeroEdicao, anoPublicacao);
 
         return novaRevista;
+    }
+    public void AdicionarRevistaNaCaixa()
+    {
+        Console.Write("Informe o Id da revista: ");
+        if (!int.TryParse(Console.ReadLine()!, out int idRevista)) {
+            Notificador.ExibirMensagem("Id digitado inválido!", ConsoleColor.Red);
+        }
+        Revista revistaEncontrada = repositorioRevista.ProcurarRevista(idRevista);
+        Console.Write("Informe o Id da caixa que terá a revista adicionada: ");
+        if (!int.TryParse(Console.ReadLine()!, out int idCaixa))
+        {
+            Notificador.ExibirMensagem("Id digitado inválido!", ConsoleColor.Red);
+        }
+        CaixaTematica caixaEncontrada = repositorioCaixa.SelecionarCaixaPorId(idCaixa);
+            repositorioRevista.AdicionarRevistaNaCaixa(revistaEncontrada, caixaEncontrada);
+
+        Notificador.ExibirMensagem("Revista adicionada com sucesso à caixa!", ConsoleColor.Green);
     }
 
 }
