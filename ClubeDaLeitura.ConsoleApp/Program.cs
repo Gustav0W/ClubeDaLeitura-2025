@@ -11,13 +11,14 @@ class Program
     static void Main(string[] args)
     {
         RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-        RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
         RepositorioRevista repositorioRevista = new RepositorioRevista();
+        RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo(repositorioAmigo, repositorioRevista);
+        RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
         TelaPrincipal menuClube = new TelaPrincipal();
         TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
         TelaCaixaTematica telaCaixaTematica = new TelaCaixaTematica();
-        TelaRevista telaRevista = new TelaRevista();
+        TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
         TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
 
         while (true)

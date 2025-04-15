@@ -77,7 +77,6 @@ public class RepositorioRevista
         Revista revistaEncontrada = revistas.Find(revista => revista.Id == idRevista)!;
         return revistaEncontrada;
     }
-
     public void AdicionarRevistaNaCaixa(Revista revistaEncontrada, CaixaTematica caixa)
     {
         caixa.Revistas.Add(revistaEncontrada);

@@ -5,8 +5,14 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 public class TelaRevista
 {
-    RepositorioRevista repositorioRevista = new RepositorioRevista();
-    RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+    RepositorioRevista repositorioRevista;
+    RepositorioCaixa repositorioCaixa;
+
+    public TelaRevista(RepositorioRevista repositorioRevista, RepositorioCaixa repositorioCaixa)
+    {
+        this.repositorioRevista = repositorioRevista;
+        this.repositorioCaixa = repositorioCaixa;
+    }
     public void ExibirCabecalho()
     {
         Console.Clear();

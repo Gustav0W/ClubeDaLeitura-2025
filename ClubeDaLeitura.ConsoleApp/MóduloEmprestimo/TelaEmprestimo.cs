@@ -9,6 +9,7 @@ public class TelaEmprestimo
 {
     public static RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
     public static RepositorioRevista repositorioRevista = new RepositorioRevista();
+    public static RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
     public RepositorioAmigo RepositorioAmigo;
     public RepositorioRevista RepositorioRevista;
@@ -21,7 +22,7 @@ public class TelaEmprestimo
     }
 
     public TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
-    public TelaRevista exibirTelaRevista = new TelaRevista();
+    public TelaRevista exibirTelaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
 
     public void ExibirCabecalho()
     {

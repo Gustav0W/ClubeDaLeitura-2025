@@ -7,8 +7,14 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
 public class RepositorioEmprestimo
 {
-    public RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-    public RepositorioRevista repositorioRevista = new RepositorioRevista();
+    public RepositorioAmigo repositorioAmigo;
+    public RepositorioRevista repositorioRevista;
+
+    public RepositorioEmprestimo(RepositorioAmigo repositorioAmigo, RepositorioRevista repositorioRevista)
+    {
+        this.repositorioAmigo = repositorioAmigo;
+        this.repositorioRevista = repositorioRevista;
+    }
 
     List<Emprestimo> emprestimos = new List<Emprestimo>();
     public int contadorEmprestimos = 0;
@@ -19,8 +25,6 @@ public class RepositorioEmprestimo
     }
     public void CadastrarEmprestimo(Emprestimo novoEmprestimo)
     {
-        emprestimos.Add(novoEmprestimo);
-
         novoEmprestimo.Id = GeradorId.GerarIdEmprestimo();
 
         emprestimos[contadorEmprestimos++] = novoEmprestimo;
