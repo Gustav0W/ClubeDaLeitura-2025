@@ -4,7 +4,7 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
 public class TelaAmigo
 {
-    public RepositorioAmigo repositorioAmigo;
+    public RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
     public TelaAmigo(RepositorioAmigo repositorioAmigo)
     {
         this.repositorioAmigo = repositorioAmigo;
@@ -40,6 +40,7 @@ public class TelaAmigo
         Console.WriteLine("==================================");
 
         Amigo novoAmigo = ObterDadosAmigo();
+
 
         repositorioAmigo.CadastrarAmigo(novoAmigo);
 
@@ -105,19 +106,7 @@ public class TelaAmigo
         Console.WriteLine("|       Visualizando amigos      |");
         Console.WriteLine("==================================");
 
-        Console.WriteLine();
-
-        Amigo[] amigosCadastrados = repositorioAmigo.SelecionarAmigos();
-
-        for (int i = 0; i < amigosCadastrados.Length; i++)
-        {
-            Amigo a = amigosCadastrados[i];
-
-            if (a == null) continue;
-
-            Console.WriteLine($"Id: {a.Id}\nNome: {a.Nome}\nResponsável: {a.Responsavel}\nTelefone:{a.Telefone}");
-            Console.WriteLine("-------------------------------------------------------------------------");
-        }
+        repositorioAmigo.ExibirListaAmigos();
 
         Notificador.ExibirMensagem("\nPressione ENTER para continuar... ", ConsoleColor.DarkYellow);
     }

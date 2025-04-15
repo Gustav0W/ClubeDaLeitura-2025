@@ -1,28 +1,31 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
+using ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
 public class RepositorioAmigo
 {
-    Amigo[] amigos = new Amigo[10];
+    List<Amigo> amigos = new List<Amigo>();
     public int contadorAmigos = 0;
     public void CadastrarAmigo(Amigo novoAmigo)
     {
+        amigos.Add(novoAmigo);
+
         novoAmigo.Id = GeradorId.GerarIdAmigo();
 
         amigos[contadorAmigos++] = novoAmigo;
     }
     public bool EditarAmigo (int idAmigo, Amigo amigoEditado)
     {
-        for (int i = 0; i < amigos.Length; i++)
+        foreach (Amigo amigo in amigos)
         {
-            if (amigos[i] == null) continue;
+            if (amigo == null) continue;
 
-            else if (amigos[i].Id == idAmigo)
+            else if (amigo.Id == idAmigo)
             {
-                amigos[i].Nome = amigoEditado.Nome;
-                amigos[i].Responsavel = amigoEditado.Responsavel;
-                amigos[i].Telefone = amigoEditado.Telefone;
+                amigo.Nome = amigoEditado.Nome;
+                amigo.Responsavel = amigoEditado.Responsavel;
+                amigo.Telefone = amigoEditado.Telefone;
 
                 return true;
             }
@@ -31,36 +34,42 @@ public class RepositorioAmigo
     }
     public bool ExcluirAmigo(int idAmigo)
     {
-        for (int i = 0; i < amigos.Length; i++)
+        Amigo amigoEncontrado = amigos.Find(Amigo => Amigo.Id == idAmigo);
+
+        if (amigoEncontrado == null)
         {
-            if (amigos[i] == null) continue;
+            Notificador.ExibirMensagem("Amigo não encontrado!", ConsoleColor.Red);
 
-            else if (amigos[i].Id == idAmigo)
-            {
-                amigos[i] = null;
-
-                return true;
-            }
+            return false;
         }
 
-        return false;
-    }
-    public Amigo[] SelecionarAmigos()
-    {
-        return amigos;
+        amigos.Remove(amigoEncontrado);
+
+        Notificador.ExibirMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
+        return true;
     }
     public Amigo SelecionarAmigoPorId(int idAmigo)
     {
-        for (int i = 0; i < amigos.Length; i++)
+        foreach (Amigo amigo in amigos)
         {
-            Amigo a = amigos[i];
-
-            if (a == null)
+            if (amigo == null)
                 continue;
-            else if (a.Id == idAmigo) ;
-                return a;
-        }
 
+            else if (amigo.Id == idAmigo)
+                return amigo;
+        }
         return null;
+    }
+    public void ExibirListaAmigos()
+    {
+        foreach (Amigo amigo in amigos)
+        {
+            if (amigo == null) continue;
+            else
+            {
+                Console.Write($"\nId: {amigo.Id}\nNome: {amigo.Nome}\nResponsável: {amigo.Responsavel}\nTelefone:{amigo.Telefone}");
+                Console.WriteLine("\n===============================================================");
+            }
+        }
     }
 }

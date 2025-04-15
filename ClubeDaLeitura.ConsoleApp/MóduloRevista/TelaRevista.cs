@@ -2,7 +2,7 @@
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
-internal class TelaRevista
+public class TelaRevista
 {
     RepositorioRevista repositorioRevista = new RepositorioRevista();
 
@@ -60,6 +60,8 @@ internal class TelaRevista
         if (!conseguiuEditar)
         {
             Notificador.ExibirMensagem("Não foi possível editar a revista...", ConsoleColor.Red);
+
+            return;
         }
         Notificador.ExibirMensagem("Revista editada com sucesso!!", ConsoleColor.Green);
     }
@@ -78,6 +80,7 @@ internal class TelaRevista
         if (!conseguiuExcluir)
         {
             Notificador.ExibirMensagem("Não foi possível excluir a revista", ConsoleColor.Red);
+            return;
         }
         Notificador.ExibirMensagem("Revista excluída com sucesso", ConsoleColor.Green);
     }
@@ -90,7 +93,6 @@ internal class TelaRevista
         Console.WriteLine("==================================");
 
         repositorioRevista.ExibirListaRevista();
-        Console.WriteLine("\n===========================================");
 
         Notificador.ExibirMensagem("Pressione ENTER para continuar... ", ConsoleColor.DarkYellow);
     }

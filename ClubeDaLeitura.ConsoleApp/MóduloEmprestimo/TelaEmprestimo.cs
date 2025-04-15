@@ -1,133 +1,160 @@
-﻿//using ClubeDaLeitura.ConsoleApp.Compartilhados;
-//using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
-//using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
+﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
+using ClubeDaLeitura.ConsoleApp.MóduloAmigo;
+using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
+using ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
-//namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
+namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
-//public class TelaEmprestimo
-//{
-//    Amigo[] meusAmigos = new Amigo[10];
-    
-//    public void ExibirCabecalho()
-//    {
-//        Console.Clear();
-//        Console.WriteLine("==================================");
-//        Console.WriteLine("|         CLUBE DO LIVRO         |");
-//        Console.WriteLine("|            GUSTAVO W           |");
-//        Console.WriteLine("==================================");
-//    }
-//    public string ExibirTelaEmprestimo()
-//    {
-//        ExibirCabecalho();
-//        Console.WriteLine("|      Gerenciando emprestimo     |");
-//        Console.WriteLine("==================================");
-//        Console.WriteLine("| 1 - Cadastrar Novo emprestimo  |");
-//        Console.WriteLine("| 2 - Editar Emprestimo          |");
-//        Console.WriteLine("| 3 - Excluir Emprestimo         |");
-//        Console.WriteLine("| 4 - Visualizar Emprestimos     |");
-//        Console.WriteLine("| S - Voltar                     |");
-//        Console.WriteLine("==================================\n");
-//        Console.Write("Informe uma opção válida: ");
-//        string opcaoEscolhida = Console.ReadLine()!;
-//        return opcaoEscolhida;
-//    }
-//    public void CadastrarNovoEmprestimo()
-//    {
-//        ExibirCabecalho();
-//        Console.WriteLine("|       Anotando Emprestimo      |");
-//        Console.WriteLine("==================================");
+public class TelaEmprestimo
+{
+    public static RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
+    public static RepositorioRevista repositorioRevista = new RepositorioRevista();
 
-//        Emprestimo novoEmprestimo = ObterDadosEmprestimo();
+    public RepositorioAmigo RepositorioAmigo;
+    public RepositorioRevista RepositorioRevista;
+    public RepositorioEmprestimo RepositorioEmprestimo;
+    public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioAmigo repositorioAmigo, RepositorioRevista repositorioRevista)
+    { 
+        RepositorioAmigo = repositorioAmigo;
+        RepositorioRevista = repositorioRevista;
+        RepositorioEmprestimo = repositorioEmprestimo;
+    }
 
-//        repositorioEmprestimo.CadastrarEmprestimo(novoEmprestimo);
+    public TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
+    public TelaRevista exibirTelaRevista = new TelaRevista();
 
-//        Notificador.ExibirMensagem("Novo emprestimo criado com sucesso!", ConsoleColor.Green);
-//    }
-//    public void EditarEmprestimo()
-//    {
-//        ExibirCabecalho();
-//        Console.WriteLine("|       Editando Emprestimo      |");
-//        Console.WriteLine("==================================");
+    public void ExibirCabecalho()
+    {
+        Console.Clear();
+        Console.WriteLine("==================================");
+        Console.WriteLine("|         CLUBE DO LIVRO         |");
+        Console.WriteLine("|            GUSTAVO W           |");
+        Console.WriteLine("==================================");
+    }
+    public string ExibirTelaEmprestimo()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("|      Gerenciando emprestimo     |");
+        Console.WriteLine("==================================");
+        Console.WriteLine("| 1 - Cadastrar Novo emprestimo  |");
+        Console.WriteLine("| 2 - Editar Emprestimo          |");
+        Console.WriteLine("| 3 - Excluir Emprestimo         |");
+        Console.WriteLine("| 4 - Visualizar Emprestimos     |");
+        Console.WriteLine("| S - Voltar                     |");
+        Console.WriteLine("==================================\n");
+        Console.Write("Informe uma opção válida: ");
+        string opcaoEscolhida = Console.ReadLine()!;
+        return opcaoEscolhida;
+    }
+    public void CadastrarNovoEmprestimo()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("|       Anotando Emprestimo      |");
+        Console.WriteLine("==================================");
 
-//        VisualizarEmprestimo(false);
+        Emprestimo novoEmprestimo = ObterDadosEmprestimo();
 
-//        Console.Write("Digite o Id do emprestimo que deseja editar: ");
-//        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        RepositorioEmprestimo.AdicionarNaListaEmprestimo(novoEmprestimo);
+        RepositorioEmprestimo.CadastrarEmprestimo(novoEmprestimo);
 
-//        Emprestimo emprestimoAntigo = repositorioEmprestimo.SelecionarEmprestimoPorId(idSelecionado);
-//        Emprestimo emprestimoEditado = ObterDadosEmprestimo();
+        Notificador.ExibirMensagem("Novo emprestimo criado com sucesso!", ConsoleColor.Green);
+    }
+    public void EditarEmprestimo()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("|       Editando Emprestimo      |");
+        Console.WriteLine("==================================");
 
-//        bool conseguiuEditar = repositorioEmprestimo.EditarEmprestimo(idSelecionado, emprestimoEditado);
+        VisualizarEmprestimo(false);
 
-//        if (!conseguiuEditar)
-//        {
-//            Notificador.ExibirMensagem("Não foi possível editar o emprestimo", ConsoleColor.Red);
+        Console.Write("Digite o Id do emprestimo que deseja editar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-//            return;
-//        }
-//        Notificador.ExibirMensagem("O emprestimo foi editado com sucesso!", ConsoleColor.Green);
-//    }
-//    public void ExcluirEmprestimo()
-//    {
-//        ExibirCabecalho();
-//        Console.WriteLine("|       Excluir emprestimo       |");
-//        Console.WriteLine("==================================");
+        Emprestimo emprestimoAntigo = RepositorioEmprestimo.SelecionarEmprestimoPorId(idSelecionado);
+        Emprestimo emprestimoEditado = ObterDadosEmprestimo();
 
-//        VisualizarEmprestimo(false);
+        bool conseguiuEditar = RepositorioEmprestimo.EditarEmprestimo(idSelecionado, emprestimoEditado);
 
-//        Console.Write("Digite o Id do emprestimo que deseja excluir: ");
-//        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        if (!conseguiuEditar)
+        {
+            Notificador.ExibirMensagem("Não foi possível editar o emprestimo", ConsoleColor.Red);
 
-//        Emprestimo emprestiomoSelecionado = repositorioEmprestimo.SelecionarEmprestimoPorId(idSelecionado);
+            return;
+        }
+        Notificador.ExibirMensagem("O emprestimo foi editado com sucesso!", ConsoleColor.Green);
+    }
+    public void ExcluirEmprestimo()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("|       Excluir emprestimo       |");
+        Console.WriteLine("==================================");
 
-//        bool conseguiuExcluir = repositorioEmprestimo.ExcluirEmprestimo(idSelecionado);
+        VisualizarEmprestimo(false);
 
-//        if (!conseguiuExcluir)
-//        {
-//            Notificador.ExibirMensagem("Não foi possível excluir o emprestimo", ConsoleColor.Red);
+        Console.Write("Digite o Id do emprestimo que deseja excluir: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-//            return;
-//        }
-//        Notificador.ExibirMensagem("Emprestimo excluída com sucesso!", ConsoleColor.Green);
-//    }
-//    public void VisualizarEmprestimo(bool exibirTitulo)
-//    {
-//        if (exibirTitulo)
-//            ExibirCabecalho();
+        bool conseguiuExcluir = RepositorioEmprestimo.ExcluirEmprestimo(idSelecionado);
 
-//        Console.WriteLine("|     Visualizando emprestimo     |");
-//        Console.WriteLine("==================================");
+        if (!conseguiuExcluir)
+        {
+            Notificador.ExibirMensagem("Não foi possível excluir o emprestimo", ConsoleColor.Red);
 
-//        Emprestimo[] emprestimosRegistrados = repositorioEmprestimo.SelecionarEmprestimos();
+            return;
+        }
+        Notificador.ExibirMensagem("Emprestimo excluída com sucesso!", ConsoleColor.Green);
+    }
+    public void VisualizarEmprestimo(bool exibirTitulo)
+    {
+        if (exibirTitulo)
+            ExibirCabecalho();
 
-//        for (int i = 0; i < emprestimosRegistrados.Length; i++)
-//        {
-//            Emprestimo e = emprestimosRegistrados[i];
+        Console.WriteLine("|     Visualizando emprestimo     |");
+        Console.WriteLine("==================================");
 
-//            if (e == null) continue;
+        RepositorioEmprestimo.ExibirListaEmprestimo();
+        Console.WriteLine("\n===========================================");
 
-//            Console.Write($"Id: {e.Id}\nTitulo: {ct.Titulo}\nRaridade: {raridadeEscrita}\n");
-//            Console.WriteLine("-------------------------------------------------");
+        Notificador.ExibirMensagem("Aperte ENTER para continuar...", ConsoleColor.DarkYellow);
+    }
+    public Emprestimo ObterDadosEmprestimo()
+    {
+        repositorioAmigo.ExibirListaAmigos();
+        //Pegar ID do AMIGO
+        Console.Write("Digite o Id do amigo: ");
+        if (!int.TryParse(Console.ReadLine(), out int idAmigo))
+        {
+            Notificador.ExibirMensagem("Id inválido", ConsoleColor.Red);
+            return null;
+        }
 
-//        }
-//        Notificador.ExibirMensagem("Aperte ENTER para continuar...", ConsoleColor.DarkYellow);
-//    }
-//    public Emprestimo ObterDadosEmprestimo()
-//    {
-//        Console.Write("Nome do amigo: ");
-//        string nomeAmigo = Console.ReadLine()!;
+        Amigo amigoEscolhido = RepositorioAmigo.SelecionarAmigoPorId(idAmigo);
+        
 
-//        Console.Write($"o Id da revista que {nomeAmigo} pegou: ");
-//        int Id = Convert.ToInt32(Console.ReadLine())!;
+        //Pegar ID da REVISTAAAAAAAAAAA
+        RepositorioRevista.ExibirListaRevista();
 
-//        Console.Write($"Informe a data que {nomeAmigo} pegou a revista(dd/MM/aaaa): ");
-//        DateTime dataEmprestimo = Convert.ToDateTime(Console.ReadLine());
+        Console.Write($"Digite o Id da revista que {amigoEscolhido.Nome} pegou: ");
+        if (!int.TryParse(Console.ReadLine(), out int idRevista))
+        {
+            Notificador.ExibirMensagem("Id inválido", ConsoleColor.Red);
+            return null;
+        }
 
-//        Console.Write("Informe a data limite do empréstimo: ");
-//        DateTime dataLimite = Convert.ToDateTime(Console.ReadLine());
+        Revista revistaEscolhida = RepositorioRevista.SelecionarRevistaPorId(idRevista);
+        if (revistaEscolhida == null)
+        {
+            Notificador.ExibirMensagem("Revista não encontrada!", ConsoleColor.Red);
+        }
 
-//        Emprestimo emprestimo = new Emprestimo(nomeAmigo, Id, dataEmprestimo, dataLimite);
+        Console.Write($"Informe a data que {amigoEscolhido.Nome} pegou a revista(dd/MM/aaaa): ");
+        DateTime dataEmprestimo = Convert.ToDateTime(Console.ReadLine());
 
-//        return emprestimo;
-//    }
-//}
+        Console.Write("Informe a data limite do empréstimo: ");
+        DateTime dataLimite = Convert.ToDateTime(Console.ReadLine());
+
+        Emprestimo emprestimo = new Emprestimo(amigoEscolhido, revistaEscolhida, dataEmprestimo, dataLimite);
+
+        return emprestimo;
+    }
+}

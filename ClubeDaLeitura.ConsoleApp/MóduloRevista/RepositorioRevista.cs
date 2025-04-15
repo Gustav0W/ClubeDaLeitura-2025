@@ -22,13 +22,9 @@ public class RepositorioRevista
     {
         foreach (Revista revista in revistas)
         {
-            if (revista == null)
-                continue;
-
-            else if (revista.Id == idRevista)
-                return revista;
+            return revistas.Find(revista => revista.Id == idRevista);
         }
-        return null;
+        return null!;
     }
     public bool EditarRevista(int idRevista, Revista revistaEditada) 
     {
@@ -59,6 +55,8 @@ public class RepositorioRevista
         }
 
         revistas.Remove(revistaEncontrada);
+
+        Notificador.ExibirMensagem("Revista excluída com sucesso!", ConsoleColor.Green);
         return true;
 
     }
@@ -69,7 +67,8 @@ public class RepositorioRevista
             if (revista == null) continue;
             else
             {
-                Console.Write($"Id: {revista.Id}\nTitulo: {revista.Titulo}\nEdição: {revista.NumeroEdicao}\nAno de publicação:{revista.AnoPublicacao}");
+                Console.Write($"\nId: {revista.Id}\nTitulo: {revista.Titulo}\nEdição: {revista.NumeroEdicao}\nAno de publicação:{revista.AnoPublicacao}");
+                Console.WriteLine("===============================================================");
             }
         }
     }

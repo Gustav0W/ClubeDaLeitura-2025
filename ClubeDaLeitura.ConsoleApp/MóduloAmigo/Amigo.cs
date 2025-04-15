@@ -8,7 +8,6 @@ public class Amigo
     public string Nome = " ";
     public string Responsavel = " ";
     public string Telefone = " ";
-    //public Emprestimo[] Emprestimos;
     
     public Amigo(string nome, string responsavel, string telefone)
     {
