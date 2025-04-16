@@ -89,26 +89,18 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
             }
             Notificador.ExibirMensagem("Aperte ENTER para continuar...", ConsoleColor.DarkYellow);
         }
-        public void ObterIdCaixaParaAdicionarNaRevista(Revista revistaEncontrada)
-        {
-            Console.Write("Informe o Id da caixa que terá a revista adicionada: ");
-            int idCaixa = Convert.ToInt32(Console.ReadLine());
-
-            CaixaTematica caixaEncontrada = ProcurarCaixa(idCaixa);
-
-            repositorioRevista.AdicionarRevistaNaCaixa(revistaEncontrada, caixaEncontrada);
-        }
         public CaixaTematica ProcurarCaixa(int idCaixa)
         {
-
             CaixaTematica caixaEncontrada = caixas.Find(caixa => caixa.Id == idCaixa)!;
-            if (caixaEncontrada == null)
+            if (caixaEncontrada != null)
+            {
+                return caixaEncontrada;
+            }
+            else
             {
                 Notificador.ExibirMensagem("Não foi possível encontrar uma caixa", ConsoleColor.Red);
-
                 return null!;
             }
-            return caixaEncontrada;
         }
     }
 }

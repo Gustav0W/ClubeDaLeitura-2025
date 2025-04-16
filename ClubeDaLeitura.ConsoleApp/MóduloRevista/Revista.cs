@@ -8,11 +8,12 @@ public class Revista
     public string Titulo = string.Empty;
     public int NumeroEdicao = 0;
     public string AnoPublicacao;
-
+    public CaixaTematica? Caixa;
     public Revista(string titulo, int numeroEdicao, string anoPublicacao)
     {
         Titulo = titulo;
         NumeroEdicao = numeroEdicao;
         AnoPublicacao = anoPublicacao;
+        Caixa = null;
     }
 }

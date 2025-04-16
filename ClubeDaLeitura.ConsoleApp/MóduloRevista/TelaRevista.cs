@@ -126,15 +126,19 @@ public class TelaRevista
         VisualizarRevista(true);
 
         Console.Write("Informe o Id da revista: ");
-        if (!int.TryParse(Console.ReadLine()!, out int idRevista))
-        {
-            Notificador.ExibirMensagem("Id digitado inválido!", ConsoleColor.Red);
-        }
+        int idRevista = Convert.ToInt32(Console.ReadLine());
+
         Revista revistaEncontrada = repositorioRevista.ProcurarRevista(idRevista);
 
         telaCaixaTematica.VisualizarCaixas(true);
 
-        repositorioCaixa.ObterIdCaixaParaAdicionarNaRevista(revistaEncontrada);
+        Console.Write($"\nDigite o Id da caixa que deseja adicionar {revistaEncontrada.Titulo}: ");
+        int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+        CaixaTematica caixaEncontrada = repositorioCaixa.ProcurarCaixa(idCaixa);
+
+        caixaEncontrada.AdicionarRevista(revistaEncontrada);
+        revistaEncontrada.Caixa = caixaEncontrada;
 
         Notificador.ExibirMensagem("Revista adicionada com sucesso à caixa!", ConsoleColor.Green);
     }

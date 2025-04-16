@@ -78,6 +78,12 @@ public class RepositorioRevista
     }
     public void AdicionarRevistaNaCaixa(Revista revistaEncontrada, CaixaTematica caixaEncontrada)
     {
+        if (revistaEncontrada == null || caixaEncontrada == null)
+            return;
+
+        if (caixaEncontrada.RevistasNaCaixa == null)
+            caixaEncontrada.RevistasNaCaixa = new List<Revista>();
+
         caixaEncontrada.RevistasNaCaixa.Add(revistaEncontrada);
     }
 

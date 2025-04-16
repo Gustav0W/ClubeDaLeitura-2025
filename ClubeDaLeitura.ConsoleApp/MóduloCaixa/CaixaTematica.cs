@@ -21,4 +21,16 @@ public class CaixaTematica
     public CaixaTematica()
     {
     }
+
+    public void AdicionarRevista(Revista revista)
+    {
+        if (revista.Caixa != null)
+        {
+            Console.WriteLine("A revista já está associada a uma caixa.");
+            return;
+        }
+
+        this.RevistasNaCaixa.Add(revista);
+        revista.Caixa = this;
+    }
 }
