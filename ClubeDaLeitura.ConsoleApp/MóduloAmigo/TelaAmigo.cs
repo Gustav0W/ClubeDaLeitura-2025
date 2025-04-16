@@ -99,7 +99,6 @@ public class TelaAmigo
     }
     public void VisualizarAmigos(bool exibirTitulo) 
     {
-
         if (exibirTitulo)
             ExibirCabecalho();
 

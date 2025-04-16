@@ -7,8 +7,14 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
 public class RepositorioEmprestimo
 {
-    public RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-    public RepositorioRevista repositorioRevista = new RepositorioRevista();
+    public RepositorioAmigo repositorioAmigo;
+    public RepositorioRevista repositorioRevista;
+
+    public RepositorioEmprestimo(RepositorioAmigo repositorioAmigo, RepositorioRevista repositorioRevista)
+    {
+        this.repositorioAmigo = repositorioAmigo;
+        this.repositorioRevista = repositorioRevista;
+    }
 
     List<Emprestimo> emprestimos = new List<Emprestimo>();
     public int contadorEmprestimos = 0;
@@ -19,8 +25,6 @@ public class RepositorioEmprestimo
     }
     public void CadastrarEmprestimo(Emprestimo novoEmprestimo)
     {
-        emprestimos.Add(novoEmprestimo);
-
         novoEmprestimo.Id = GeradorId.GerarIdEmprestimo();
 
         emprestimos[contadorEmprestimos++] = novoEmprestimo;
@@ -45,7 +49,7 @@ public class RepositorioEmprestimo
     }
     public bool ExcluirEmprestimo(int idEmprestimo)
     {
-        Emprestimo emprestimoEncontrado = emprestimos.Find(Emprestimo => Emprestimo.Id == idEmprestimo);
+        Emprestimo emprestimoEncontrado = emprestimos.Find(Emprestimo => Emprestimo.Id == idEmprestimo)!;
 
         if (emprestimoEncontrado == null)
         {
@@ -67,7 +71,7 @@ public class RepositorioEmprestimo
             else if (emprestimo.Id == idEmprestimo)
                 return emprestimo;
         }
-        return null;
+        return null!;
     }
     public void ExibirListaEmprestimo()
     {
@@ -77,7 +81,8 @@ public class RepositorioEmprestimo
             else
             {
                 Console.Write($"Id: {emprestimo.Id}\nAmigo que pegou: {emprestimo.Amigo.Nome}\n" +
-                    $"Revista: {(emprestimo.Revista.Titulo)}\nData que pegou: {emprestimo.DataEmprestimo}\nData Limite: {emprestimo.DataLimite}");
+                    $"Revista: {(emprestimo.Revista.Titulo)}\nData que pegou: {emprestimo.DataEmprestimo.ToShortDateString}\nData Limite: {emprestimo.DataLimite.ToShortDateString}");
+                Console.Write("\n=============================================================\n");
             }
         }
     }

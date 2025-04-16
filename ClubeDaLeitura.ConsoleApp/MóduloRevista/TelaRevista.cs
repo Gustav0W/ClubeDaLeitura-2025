@@ -5,8 +5,16 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 public class TelaRevista
 {
-    RepositorioRevista repositorioRevista = new RepositorioRevista();
-    RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+    RepositorioRevista repositorioRevista;
+    RepositorioCaixa repositorioCaixa;
+    TelaCaixaTematica telaCaixaTematica;
+
+    public TelaRevista(RepositorioRevista repositorioRevista, RepositorioCaixa repositorioCaixa, TelaCaixaTematica telaCaixa)
+    {
+        this.repositorioRevista = repositorioRevista;
+        this.repositorioCaixa = repositorioCaixa;
+        telaCaixaTematica = telaCaixa;
+    }
     public void ExibirCabecalho()
     {
         Console.Clear();
@@ -55,7 +63,7 @@ public class TelaRevista
         Console.Write("Digite o Id da revista que deseja editar: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-        Revista revistaAntiga = repositorioRevista.SelecionarRevistaPorId(idSelecionado);
+        Revista revistaAntiga = repositorioRevista.ProcurarRevista(idSelecionado);
         Revista revistaEditada = ObterDadosRevista();
 
         bool conseguiuEditar = repositorioRevista.EditarRevista(idSelecionado, revistaEditada);
@@ -115,18 +123,17 @@ public class TelaRevista
     }
     public void AdicionarRevistaNaCaixa()
     {
+        VisualizarRevista(true);
+
         Console.Write("Informe o Id da revista: ");
         if (!int.TryParse(Console.ReadLine()!, out int idRevista)) {
             Notificador.ExibirMensagem("Id digitado inválido!", ConsoleColor.Red);
         }
         Revista revistaEncontrada = repositorioRevista.ProcurarRevista(idRevista);
-        Console.Write("Informe o Id da caixa que terá a revista adicionada: ");
-        if (!int.TryParse(Console.ReadLine()!, out int idCaixa))
-        {
-            Notificador.ExibirMensagem("Id digitado inválido!", ConsoleColor.Red);
-        }
-        CaixaTematica caixaEncontrada = repositorioCaixa.SelecionarCaixaPorId(idCaixa);
-            repositorioRevista.AdicionarRevistaNaCaixa(revistaEncontrada, caixaEncontrada);
+
+        telaCaixaTematica.VisualizarCaixas(true);
+
+        repositorioCaixa.ObterIdCaixaParaAdicionarNaRevista(revistaEncontrada);
 
         Notificador.ExibirMensagem("Revista adicionada com sucesso à caixa!", ConsoleColor.Green);
     }

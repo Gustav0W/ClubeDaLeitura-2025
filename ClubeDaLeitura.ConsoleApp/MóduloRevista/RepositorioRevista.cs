@@ -5,6 +5,13 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 public class RepositorioRevista
 {
+    RepositorioCaixa repositorioCaixa;
+
+    public RepositorioRevista(RepositorioCaixa repositorioCaixa)
+    {
+        this.repositorioCaixa = repositorioCaixa;
+    }
+
     List<Revista> revistas = new List<Revista>();
     int contadorRevistas = 0;
 
@@ -17,14 +24,6 @@ public class RepositorioRevista
         novaRevista.Id = GeradorId.GerarIdRevista();
 
         revistas[contadorRevistas++] = novaRevista;
-    }
-    public Revista SelecionarRevistaPorId(int idRevista)
-    {
-        foreach (Revista revista in revistas)
-        {
-            return revistas.Find(revista => revista.Id == idRevista);
-        }
-        return null!;
     }
     public bool EditarRevista(int idRevista, Revista revistaEditada) 
     {
@@ -45,7 +44,7 @@ public class RepositorioRevista
     }
     public bool ExcluirRevista(int idRevista)
     {
-        Revista revistaEncontrada = revistas.Find(Revista =>  Revista.Id == idRevista);
+        Revista revistaEncontrada = revistas.Find(Revista =>  Revista.Id == idRevista)!;
 
         if (revistaEncontrada == null)
         {
@@ -77,10 +76,9 @@ public class RepositorioRevista
         Revista revistaEncontrada = revistas.Find(revista => revista.Id == idRevista)!;
         return revistaEncontrada;
     }
-
-    public void AdicionarRevistaNaCaixa(Revista revistaEncontrada, CaixaTematica caixa)
+    public void AdicionarRevistaNaCaixa(Revista revistaEncontrada, CaixaTematica caixaEncontrada)
     {
-        caixa.Revistas.Add(revistaEncontrada);
+        caixaEncontrada.RevistasNaCaixa.Add(revistaEncontrada);
     }
 
 }
