@@ -1,29 +1,29 @@
 # Clube Da Leitura
-Um programa para gerenciar um clube da leitura, permitindo o cadastro e a organização de amigos, caixas, revistas, e empréstimos de revistas.
+Um programa para gerenciar um clube da leitura, permitindo o cadastro e a organizaÃ§Ã£o de amigos, caixas, revistas, e emprÃ©stimos de revistas.
 
 ![](https://i.imgur.com/2QOxX97.gif)
 
-## O que temos até então
-Os menus funcionam direitinho com uma excessão ali.
+## O que temos atÃ© entÃ£o
+Os menus funcionam direitinho com uma excessÃ£o ali.
 
-É possível fazer as seguintes ações:
+Ã‰ possÃ­vel fazer as seguintes aÃ§Ãµes:
 - Cadastrar, editar, excluir e visualizar Amigos
-- Cadastrar, editar, excluir e visualizar Caixas temáticas de revistas
-- Cadastrar, editar e excluir Empréstimos (Não é possível visualizar ainda por conta de um erro)
+- Cadastrar, editar, excluir e visualizar Caixas temÃ¡ticas de revistas
+- Tenho que rever os emprÃ©stimos 
 - Cadastrar, editar, excluir e visualizar Revistas
 
 
-*As validações não foram totalmente implementadas ainda*
+*As validaÃ§Ãµes nÃ£o foram totalmente implementadas ainda*
 
 ## Como Utilizar
-1. **Clone o Repositório:**
+1. **Clone o RepositÃ³rio:**
 ```
 git clone https://github.com/Gustav0W/ClubeDaLeitura-2025
 ```
 
-2. Abra o terminal ou prompt de comando e navegue até a pasta raiz do programa.
+2. Abra o terminal ou prompt de comando e navegue atÃ© a pasta raiz do programa.
 
-3. Utilize o comando abaixo para restaurar as dependências do projeto.
+3. Utilize o comando abaixo para restaurar as dependÃªncias do projeto.
 ```
 dotnet restore
 ```
@@ -42,13 +42,6 @@ ClubeDaLeitura.exe
 dotnet run --project ClubeDaLeitura
 ```
 
-## Observações
-O projeto não está totalmente concluído, mas pretendo concluir. No devido tempo que tive não consegui terminar ele.
-
-Tenho um certo perfeccionismo e quando alguma coisa da errado e eu não consigo resolver o erro, simplesmente não consigo continuar a fazer o restante antes de resolver.
-
-E se tem algo que encontrei nesse código, são erros que não consegui resolver. Pedirei ajuda aos professores para concertar e conseguir prosseguir com o programa.
-
-Mesmo não valendo nota ou coisas assim é algo que fico triste de acontecer, não conseguir entregar o projeto no tempo delimitado me deixa deveras revoltado.
-
-Mas sem choro, bola pra frente, mesmo que o tempo passe eu ainda terminarei e verei esse código funcionando direitinho.
+## ObservaÃ§Ãµes
+O projeto ainda nÃ£o estÃ¡ concluÃ­do, infelizmente, mas ta MUITO melhor que ontem. Os erros encontrados foram corrigidos, mas claro que surgiu uma pedra nova no caminho.
+Pelo menos consigo sentir que Ã© a Ãºltima pedra e em breve tudo estarÃ¡ mais resolvido.
