@@ -4,7 +4,7 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
 public class TelaAmigo
 {
-    public RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
+    RepositorioAmigo repositorioAmigo;
     public TelaAmigo(RepositorioAmigo repositorioAmigo)
     {
         this.repositorioAmigo = repositorioAmigo;
@@ -26,6 +26,7 @@ public class TelaAmigo
         Console.WriteLine("| 2 - Editar Cadastro de Amigo   |");
         Console.WriteLine("| 3 - Excluir Cadastro de Amigo  |");
         Console.WriteLine("| 4 - Visualizar Amigos          |");
+        Console.WriteLine("| 5 - Ver Empréstimos do Amigo   |");
         Console.WriteLine("| S - Voltar                     |");
         Console.WriteLine("==================================\n");
         Console.Write("Informe uma opção válida: ");
@@ -41,6 +42,24 @@ public class TelaAmigo
 
         Amigo novoAmigo = ObterDadosAmigo();
 
+        string erros = novoAmigo.Validar();
+
+        if (erros.Length > 0)
+        {
+            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+
+            CadastrarAmigo();
+
+            return;
+        }
+
+        if (repositorioAmigo.VerificarNovoAmigo(novoAmigo))
+        {
+            Console.WriteLine("Já existe um amigo com esses dados");
+            Console.Write("\nPressione qualquer tecla para tentar novamente");
+            Console.ReadKey();
+            CadastrarAmigo();
+        }
 
         repositorioAmigo.CadastrarAmigo(novoAmigo);
 

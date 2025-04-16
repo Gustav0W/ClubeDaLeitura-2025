@@ -47,6 +47,28 @@ public class TelaRevista
 
         Revista novaRevista = ObterDadosRevista();
 
+        if (novaRevista == null) return;
+
+        string erros = novaRevista.Validar();
+
+        if (erros.Length > 0)
+        {
+            Console.WriteLine(erros);
+            Console.Write("\nPressione qualquer tecla para tentar novamente");
+            Console.ReadKey();
+            CadastrarRevista();
+            return;
+        }
+
+        if (repositorioRevista.VerificarNomeNovoRegistro(novaRevista))
+        {
+            Console.WriteLine("\nJá existe uma revista dessa edição!");
+            Console.Write("\nPressione Qualquer tecla para tentar novamente!");
+            Console.ReadKey();
+            CadastrarRevista();
+            return;
+        }
+
         repositorioRevista.AdicionarNaLista(novaRevista);
         repositorioRevista.CadastrarRevista(novaRevista);
 

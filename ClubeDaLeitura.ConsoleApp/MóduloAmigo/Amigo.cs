@@ -1,5 +1,7 @@
 ﻿//using ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
 
+using ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
+
 namespace ClubeDaLeitura.ConsoleApp.MóduloAmigo;
 
 public class Amigo
@@ -8,6 +10,7 @@ public class Amigo
     public string Nome = " ";
     public string Responsavel = " ";
     public string Telefone = " ";
+    public List<Emprestimo> Emprestimos = new List<Emprestimo>();
 
     public Amigo(string nome, string responsavel, string telefone)
     {

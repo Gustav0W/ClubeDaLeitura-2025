@@ -72,4 +72,18 @@ public class RepositorioAmigo
             }
         }
     }
+    public bool VerificarNovoAmigo(Amigo novoAmigo)
+    {
+        foreach (Amigo amigo in amigos) 
+        {
+            if (amigo == null)
+                continue;
+
+            if (novoAmigo.Telefone == amigo.Telefone && novoAmigo.Id == 0)
+                return true;
+        }
+        return false;
+
+
+    }
 }

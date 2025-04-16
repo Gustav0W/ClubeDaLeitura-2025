@@ -26,7 +26,8 @@ public class RepositorioEmprestimo
     public void CadastrarEmprestimo(Emprestimo novoEmprestimo)
     {
         novoEmprestimo.Id = GeradorId.GerarIdEmprestimo();
-
+        //novoEmprestimo.Revista.Emprestar();
+        //novoEmprestimo.Amigo.BuscarEmprestimo(novoEmprestimo);
         emprestimos[contadorEmprestimos++] = novoEmprestimo;
     }
     public bool EditarEmprestimo(int idEmprestimo, Emprestimo emprestimoEditado)
@@ -39,9 +40,6 @@ public class RepositorioEmprestimo
             {
                 emprestimo.Amigo = emprestimoEditado.Amigo;
                 emprestimo.Revista = emprestimoEditado.Revista;
-                emprestimo.DataEmprestimo = emprestimoEditado.DataEmprestimo;
-                emprestimo.DataLimite = emprestimoEditado.DataLimite;
-
                 return true;
             }
         }
@@ -60,6 +58,42 @@ public class RepositorioEmprestimo
 
         emprestimos.Remove(emprestimoEncontrado);
         return true;
+    }
+    public bool VerificarEmprestimoAtivo(Amigo amigoEncontrado)
+    {
+        if (amigoEncontrado.Emprestimos == null)
+            return false;
+
+        foreach (Emprestimo emprestimo in amigoEncontrado.Emprestimos)
+        {
+            if (emprestimo == null) continue;
+
+            if (emprestimo.Situacao == "Aberto") return true;
+        }
+        return false;
+    }
+    public bool VerificarDevolucao(Emprestimo emprestimoEncontrado)
+    {
+        foreach (Emprestimo emprestimo in emprestimos)
+        {
+            if (emprestimo == null) continue;
+
+            if (emprestimoEncontrado.Id == emprestimo.Id && emprestimoEncontrado.Situacao == "Concluído");
+            return true;
+        }
+        return false;
+    }
+    public void VerificarAtraso(List<Emprestimo> emprestimosCadastrados)
+    {
+        foreach (Emprestimo emprestimo in emprestimosCadastrados)
+        {
+            if (emprestimo == null) continue;
+
+            if (emprestimo.Situacao == "Concluído") continue;
+
+            if (DateTime.Now > emprestimo.ObterDataDevolucao())
+                emprestimo.Situacao = "Atrasado";
+        }
     }
     public Emprestimo SelecionarEmprestimoPorId(int idEmprestimo)
     {
@@ -81,7 +115,7 @@ public class RepositorioEmprestimo
             else
             {
                 Console.Write($"Id: {emprestimo.Id}\nAmigo que pegou: {emprestimo.Amigo.Nome}\n" +
-                    $"Revista: {(emprestimo.Revista.Titulo)}\nData que pegou: {emprestimo.DataEmprestimo.ToShortDateString}\nData Limite: {emprestimo.DataLimite.ToShortDateString}");
+                    $"Revista: {(emprestimo.Revista.Titulo)}\nData Devolução: {emprestimo.ObterDataDevolucao().ToShortDateString()}\nData Limite:");
                 Console.Write("\n=============================================================\n");
             }
         }

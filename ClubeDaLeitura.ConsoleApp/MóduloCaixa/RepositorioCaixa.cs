@@ -82,7 +82,7 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
 
                 Console.ForegroundColor = caixa.Cor;
 
-                Console.Write($"\nId: {caixa.Id}\nTitulo: {caixa.Titulo}\nEtiqueta:{caixa.Etiqueta}\nEdição: {caixa.Raridade}");
+                Console.Write($"\nId: {caixa.Id}\nTitulo: {caixa.Titulo}\nEtiqueta:{caixa.Etiqueta}\nEdição: {caixa.Raridade}\nDias de empréstimo: {caixa.DiasEmprestimo}");
                 Console.WriteLine("\n===============================================================");
 
                 Console.ResetColor();
@@ -101,6 +101,17 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
                 Notificador.ExibirMensagem("Não foi possível encontrar uma caixa", ConsoleColor.Red);
                 return null!;
             }
+        }
+        public bool VerificarEtiqueta(CaixaTematica caixaVerificar)
+        {
+            foreach (CaixaTematica caixa in caixas)
+            {
+                if (caixa == null) continue;
+
+                if (caixaVerificar.Etiqueta == caixa.Etiqueta)
+                    return true;
+            }
+            return false;
         }
     }
 }

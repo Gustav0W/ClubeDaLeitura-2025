@@ -44,6 +44,26 @@ public class TelaCaixaTematica
 
         CaixaTematica novaCaixa = ObterDadosCaixa();
 
+        string erros = novaCaixa.Validar();
+
+        if (erros.Length > 0)
+        {
+            Console.WriteLine(erros);
+            Console.Write("\nPara tentar novamente, pressione uma tecla qualquer");
+            Console.ReadKey();
+            CadastrarNovaCaixa();
+            return;
+        }
+
+        if (repositorioCaixa.VerificarEtiqueta(novaCaixa))
+        {
+            Console.WriteLine("\nExiste uma caixa com a mesma etiqueta");
+            Console.Write("Para tentar novamente, pressione uma tecla qualquer");
+            Console.ReadKey();
+            CadastrarNovaCaixa();
+            return;
+        }
+
         repositorioCaixa.AdicionarCaixaNaLista(novaCaixa);
         repositorioCaixa.CadastrarCaixa(novaCaixa);
 
@@ -155,8 +175,9 @@ public class TelaCaixaTematica
         }
 
         ConsoleColor cor = repositorioCaixa.DefinirCor(Cor);
-
+        
         CaixaTematica Caixa = new CaixaTematica(nome, etiqueta, raridade, cor);
+        Caixa.DefinirDiasDeEmprestimo(raridade);
 
         return Caixa;
     }

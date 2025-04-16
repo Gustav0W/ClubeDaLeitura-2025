@@ -66,7 +66,7 @@ public class RepositorioRevista
             if (revista == null) continue;
             else
             {
-                Console.Write($"\nId: {revista.Id}\nTitulo: {revista.Titulo}\nEdição: {revista.NumeroEdicao}\nAno de publicação:{revista.AnoPublicacao}");
+                Console.Write($"\nId: {revista.Id}\nTitulo: {revista.Titulo}\nEdição: {revista.NumeroEdicao}\nAno de publicação:{revista.AnoPublicacao}\nStatus: {revista.Status}");
                 Console.WriteLine("\n===============================================================");
             }
         }
@@ -86,5 +86,24 @@ public class RepositorioRevista
 
         caixaEncontrada.RevistasNaCaixa.Add(revistaEncontrada);
     }
+    public bool VerificarRevistaEmprestada(Revista revistaEcontrada)
+    {
+        if (revistaEcontrada.Status == "Emprestada") return true;
+        else return false;
+    }
+    public bool VerificarRevistaDisponivel(Revista revistaEcontrada)
+    {
+        if (revistaEcontrada.Status == "Disponível") return true;
+        else return false;
+    }
+    public bool VerificarNomeNovoRegistro(Revista novaRevista)
+    {
+        foreach (Revista revista in revistas)
+        {
+            if (revista == null) continue;
 
+            if (novaRevista.Titulo == revista.Titulo && novaRevista.NumeroEdicao == revista.NumeroEdicao && novaRevista.Id == 0) return true;
+        }
+        return false;
+    }
 }
