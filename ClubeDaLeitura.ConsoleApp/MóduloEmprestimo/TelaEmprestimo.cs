@@ -21,7 +21,7 @@ public class TelaEmprestimo
     }
 
     public TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
-    public static TelaCaixaTematica telaCaixa = new TelaCaixaTematica();
+    public static TelaCaixaTematica telaCaixa = new TelaCaixaTematica(repositorioCaixa);
     public TelaRevista exibirTelaRevista = new TelaRevista(repositorioRevista, repositorioCaixa, telaCaixa);
 
     public void ExibirCabecalho()

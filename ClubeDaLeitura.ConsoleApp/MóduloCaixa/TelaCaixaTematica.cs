@@ -6,7 +6,12 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa;
 
 public class TelaCaixaTematica
 {
-    RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+    RepositorioCaixa repositorioCaixa;
+
+    public TelaCaixaTematica(RepositorioCaixa repositorioCaixa)
+    {
+        this.repositorioCaixa = repositorioCaixa;
+    }
     public void ExibirCabecalho()
     {
         Console.Clear();

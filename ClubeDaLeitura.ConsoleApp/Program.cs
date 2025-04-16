@@ -19,7 +19,7 @@ class Program
 
         TelaPrincipal menuClube = new TelaPrincipal();
         TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
-        TelaCaixaTematica telaCaixaTematica = new TelaCaixaTematica();
+        TelaCaixaTematica telaCaixaTematica = new TelaCaixaTematica(repositorioCaixa);
         TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa, telaCaixaTematica);
         TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
 
