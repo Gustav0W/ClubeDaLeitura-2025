@@ -117,7 +117,7 @@ public class TelaRevista
         Console.Write("Informe o ano de publicação: ");
         string anoPublicacao = Console.ReadLine()!;
 
-        Revista novaRevista = new Revista(titulo, numeroEdicao, anoPublicacao);
+        Revista novaRevista = new Revista(titulo, numeroEdicao, anoPublicacao, "Disponível");
 
         return novaRevista;
     }

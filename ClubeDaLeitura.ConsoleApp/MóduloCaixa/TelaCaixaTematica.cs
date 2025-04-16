@@ -108,7 +108,7 @@ public class TelaCaixaTematica
     }
     public void ExibirRevistasNaCaixa()
     {
-        VisualizarCaixas(false);
+        VisualizarCaixas(true);
 
         Console.Write("Informe o Id da caixa que deseja ver: ");
         if (!int.TryParse(Console.ReadLine(), out int idSelecionado))
@@ -118,6 +118,11 @@ public class TelaCaixaTematica
         }
 
         CaixaTematica caixaSelecionada = repositorioCaixa.ProcurarCaixa(idSelecionado);
+        if (caixaSelecionada == null)
+        {
+            Notificador.ExibirMensagem("Caixa não encontrada", ConsoleColor.Red);
+            return;
+        }
 
         Console.WriteLine($"\nRevistas registradas na caixa {caixaSelecionada.Titulo}");
         Console.WriteLine("==================================");
@@ -130,6 +135,7 @@ public class TelaCaixaTematica
             Console.WriteLine($"Ano de Publicação: {revista.AnoPublicacao}");
             Console.WriteLine("----------------------------------");
         }
+        Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
     }
     public CaixaTematica ObterDadosCaixa()
     {

@@ -34,7 +34,7 @@ public class RepositorioAmigo
     }
     public bool ExcluirAmigo(int idAmigo)
     {
-        Amigo amigoEncontrado = amigos.Find(Amigo => Amigo.Id == idAmigo);
+        Amigo amigoEncontrado = amigos.Find(Amigo => Amigo.Id == idAmigo)!;
 
         if (amigoEncontrado == null)
         {
@@ -58,7 +58,7 @@ public class RepositorioAmigo
             else if (amigo.Id == idAmigo)
                 return amigo;
         }
-        return null;
+        return null!;
     }
     public void ExibirListaAmigos()
     {
