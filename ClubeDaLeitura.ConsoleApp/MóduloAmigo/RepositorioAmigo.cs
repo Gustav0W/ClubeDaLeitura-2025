@@ -15,7 +15,7 @@ public class RepositorioAmigo
 
         amigos[contadorAmigos++] = novoAmigo;
     }
-    public bool EditarAmigo (int idAmigo, Amigo amigoEditado)
+    public bool EditarAmigo(int idAmigo, Amigo amigoEditado)
     {
         foreach (Amigo amigo in amigos)
         {

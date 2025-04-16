@@ -11,13 +11,16 @@ class Program
     static void Main(string[] args)
     {
         RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-        RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo();
-        RepositorioRevista repositorioRevista = new RepositorioRevista();
+        RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+        RepositorioRevista repositorioRevista = new RepositorioRevista(repositorioCaixa);
+        repositorioCaixa.DefinirRepositorioRevista(repositorioRevista);
+
+        RepositorioEmprestimo repositorioEmprestimo = new RepositorioEmprestimo(repositorioAmigo, repositorioRevista);
 
         TelaPrincipal menuClube = new TelaPrincipal();
         TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
         TelaCaixaTematica telaCaixaTematica = new TelaCaixaTematica();
-        TelaRevista telaRevista = new TelaRevista();
+        TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa, telaCaixaTematica);
         TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioAmigo, repositorioRevista);
 
         while (true)
@@ -60,6 +63,9 @@ class Program
                     case "4":
                         telaCaixaTematica.VisualizarCaixas(true);
                         break;
+                    case "5":
+                        telaCaixaTematica.ExibirRevistasNaCaixa();
+                        break;
 
                 }
             }
@@ -67,7 +73,7 @@ class Program
             {
                 string opcaoEscolhida = telaRevista.ExibirTelaRevistas().ToUpper();
 
-                switch(opcaoEscolhida)
+                switch (opcaoEscolhida)
                 {
                     case "1":
                         telaRevista.CadastrarRevista();
@@ -111,7 +117,7 @@ class Program
             {
                 break;
             }
-        } 
-        
+        }
+
     }
 }

@@ -6,12 +6,12 @@ public class CaixaTematica
 {
     public int Id = 0;
     public string Titulo = " ";
-    public char Etiqueta = ' ';
+    public string Etiqueta = " ";
     public byte Raridade = 0;
-    public ConsoleColor Cor {  get; set; }
-    public List<Revista> Revistas { get; set; } = new List<Revista>();
+    public ConsoleColor Cor { get; set; }
+    public List<Revista> RevistasNaCaixa = new List<Revista>();
 
-    public CaixaTematica(string titulo, char etiqueta, byte raridade, ConsoleColor cor) 
+    public CaixaTematica(string titulo, string etiqueta, byte raridade, ConsoleColor cor)
     {
         Titulo = titulo;
         Etiqueta = etiqueta;

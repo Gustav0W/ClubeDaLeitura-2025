@@ -1,10 +1,27 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhados;
+using ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
 {
     public class RepositorioCaixa
     {
-        CaixaTematica[] caixas = new CaixaTematica[10];
+        RepositorioRevista repositorioRevista;
+        public RepositorioRevista _repositorioRevista;
+
+        public RepositorioCaixa() { }
+
+        public void DefinirRepositorioRevista(RepositorioRevista repositorioRevista)
+        {
+            _repositorioRevista = repositorioRevista;
+        }
+
+        public RepositorioCaixa(RepositorioRevista repositorioRevista)
+        {
+            this.repositorioRevista = repositorioRevista;
+        }
+
+        List<CaixaTematica> caixas = new List<CaixaTematica>();
+
         int contadorCaixas = 0;
 
         public ConsoleColor DefinirCor(char resposta)
@@ -25,17 +42,21 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
 
             caixas[contadorCaixas++] = novaCaixa;
         }
+        public void AdicionarCaixaNaLista(CaixaTematica novaCaixa)
+        {
+            caixas.Add(novaCaixa);
+        }
         public bool EditarCaixa(int idCaixa, CaixaTematica caixaEditada)
         {
-            for (int i = 0; i < caixas.Length; i++)
+            foreach (CaixaTematica caixa in caixas)
             {
-                if (caixas[i] == null) continue;
+                if (caixa == null) continue;
 
-                else if (caixas[i].Id == idCaixa)
+                else if (caixa.Id == idCaixa)
                 {
-                    caixas[i].Titulo = caixaEditada.Titulo;
-                    caixas[i].Etiqueta = caixaEditada.Etiqueta;
-                    caixas[i].Raridade = caixaEditada.Raridade;
+                    caixa.Titulo = caixaEditada.Titulo;
+                    caixa.Etiqueta = caixaEditada.Etiqueta;
+                    caixa.Raridade = caixaEditada.Raridade;
 
                     return true;
                 }
@@ -44,35 +65,50 @@ namespace ClubeDaLeitura.ConsoleApp.MóduloCaixa
         }
         public bool ExcluirCaixa(int idCaixa)
         {
-            for (int i = 0; i <= caixas.Length; i++)
-            {
-                if (caixas[i] == null) continue;
+            CaixaTematica caixaEncontrada = caixas.Find(Caixa => Caixa.Id == idCaixa)!;
 
-                else if (caixas[i].Id == idCaixa)
-                {
-                    caixas[i] = null;
-                    return true;
-                }
-            }
-            return false;
+            if (caixaEncontrada == null) return false;
+
+            caixas.Remove(caixaEncontrada);
+            return true;
         }
-        public CaixaTematica[] SelecionarCaixas()
+        public void ExibirListaDeCaixas()
         {
-            return caixas;
-        }
-        public CaixaTematica SelecionarCaixaPorId(int idCaixa)
-        {
-            for (int i = 0; i < caixas.Length; i++)
+            foreach (CaixaTematica caixa in caixas)
             {
-                CaixaTematica c = caixas[i];
+                if (caixa == null) continue;
 
-                if (c == null)
-                    continue;
+                string raridadeEscrita = caixa.Raridade == 1 ? "Comum" : "Raro";
 
-                else if (c.Id == idCaixa)
-                    return c;
+                Console.ForegroundColor = caixa.Cor;
+
+                Console.Write($"\nId: {caixa.Id}\nTitulo: {caixa.Titulo}\nEtiqueta:{caixa.Etiqueta}\nEdição: {caixa.Raridade}");
+                Console.WriteLine("\n===============================================================");
+
+                Console.ResetColor();
             }
-            return null;
+            Notificador.ExibirMensagem("Aperte ENTER para continuar...", ConsoleColor.DarkYellow);
+        }
+        public void ObterIdCaixaParaAdicionarNaRevista(Revista revistaEncontrada)
+        {
+            Console.Write("Informe o Id da caixa que terá a revista adicionada: ");
+            int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+            CaixaTematica caixaEncontrada = ProcurarCaixa(idCaixa);
+
+            repositorioRevista.AdicionarRevistaNaCaixa(revistaEncontrada, caixaEncontrada);
+        }
+        public CaixaTematica ProcurarCaixa(int idCaixa)
+        {
+
+            CaixaTematica caixaEncontrada = caixas.Find(caixa => caixa.Id == idCaixa)!;
+            if (caixaEncontrada == null)
+            {
+                Notificador.ExibirMensagem("Não foi possível encontrar uma caixa", ConsoleColor.Red);
+
+                return null!;
+            }
+            return caixaEncontrada;
         }
     }
 }

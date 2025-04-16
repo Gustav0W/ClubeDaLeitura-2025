@@ -97,9 +97,8 @@ public class TelaAmigo
         Notificador.ExibirMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
 
     }
-    public void VisualizarAmigos(bool exibirTitulo) 
+    public void VisualizarAmigos(bool exibirTitulo)
     {
-
         if (exibirTitulo)
             ExibirCabecalho();
 
@@ -110,7 +109,6 @@ public class TelaAmigo
 
         Notificador.ExibirMensagem("\nPressione ENTER para continuar... ", ConsoleColor.DarkYellow);
     }
-
     public Amigo ObterDadosAmigo()
     {
         Console.Write("Informe o nome: ");

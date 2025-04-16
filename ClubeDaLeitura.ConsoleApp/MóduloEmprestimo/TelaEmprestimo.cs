@@ -4,24 +4,25 @@ using ClubeDaLeitura.ConsoleApp.MóduloCaixa;
 using ClubeDaLeitura.ConsoleApp.MóduloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp.MóduloEmprestimo;
-
 public class TelaEmprestimo
 {
     public static RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-    public static RepositorioRevista repositorioRevista = new RepositorioRevista();
+    public static RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+    public static RepositorioRevista repositorioRevista = new RepositorioRevista(repositorioCaixa);
 
     public RepositorioAmigo RepositorioAmigo;
     public RepositorioRevista RepositorioRevista;
     public RepositorioEmprestimo RepositorioEmprestimo;
     public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioAmigo repositorioAmigo, RepositorioRevista repositorioRevista)
-    { 
+    {
         RepositorioAmigo = repositorioAmigo;
         RepositorioRevista = repositorioRevista;
         RepositorioEmprestimo = repositorioEmprestimo;
     }
 
     public TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
-    public TelaRevista exibirTelaRevista = new TelaRevista();
+    public static TelaCaixaTematica telaCaixa = new TelaCaixaTematica();
+    public TelaRevista exibirTelaRevista = new TelaRevista(repositorioRevista, repositorioCaixa, telaCaixa);
 
     public void ExibirCabecalho()
     {
@@ -125,11 +126,10 @@ public class TelaEmprestimo
         if (!int.TryParse(Console.ReadLine(), out int idAmigo))
         {
             Notificador.ExibirMensagem("Id inválido", ConsoleColor.Red);
-            return null;
+            return null!;
         }
 
         Amigo amigoEscolhido = RepositorioAmigo.SelecionarAmigoPorId(idAmigo);
-        
 
         //Pegar ID da REVISTAAAAAAAAAAA
         RepositorioRevista.ExibirListaRevista();
@@ -138,10 +138,10 @@ public class TelaEmprestimo
         if (!int.TryParse(Console.ReadLine(), out int idRevista))
         {
             Notificador.ExibirMensagem("Id inválido", ConsoleColor.Red);
-            return null;
+            return null!;
         }
 
-        Revista revistaEscolhida = RepositorioRevista.SelecionarRevistaPorId(idRevista);
+        Revista revistaEscolhida = RepositorioRevista.ProcurarRevista(idRevista);
         if (revistaEscolhida == null)
         {
             Notificador.ExibirMensagem("Revista não encontrada!", ConsoleColor.Red);
@@ -153,7 +153,7 @@ public class TelaEmprestimo
         Console.Write("Informe a data limite do empréstimo: ");
         DateTime dataLimite = Convert.ToDateTime(Console.ReadLine());
 
-        Emprestimo emprestimo = new Emprestimo(amigoEscolhido, revistaEscolhida, dataEmprestimo, dataLimite);
+        Emprestimo emprestimo = new Emprestimo(amigoEscolhido, revistaEscolhida!, dataEmprestimo, dataLimite);
 
         return emprestimo;
     }
